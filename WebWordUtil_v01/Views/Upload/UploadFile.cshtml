@@ -1,0 +1,108 @@
+﻿@using WebWordUtil_v01.Models
+@model UploadFileModel
+
+@{
+    ViewBag.Title = "";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-12">
+        @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @Html.TextBoxFor(m => m.File, new { type = "file", name = "File", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.File, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(m => m.IsFooterTextChange)
+                        @Html.LabelFor(m => m.IsFooterTextChange)
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.FooterTextFind, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.FooterTextFind, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FooterTextFind, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.FooterTextReplace, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.FooterTextReplace, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.FooterTextReplace, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-2">
+                        @Html.CheckBoxFor(m => m.IsHeaderTextChange)
+                        @Html.LabelFor(m => m.IsHeaderTextChange)
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.HeaderTextFind, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.HeaderTextFind, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.HeaderTextFind, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-3">
+                        @Html.LabelFor(m => m.HeaderTextReplace, new { @class = "control-label" })
+                        @Html.TextBoxFor(m => m.HeaderTextReplace, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.HeaderTextReplace, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-2"></div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-3">
+                        @Html.CheckBoxFor(m => m.IsBalanceSheetTableDelete)
+                        @Html.LabelFor(m => m.IsBalanceSheetTableDelete)
+                    </div>
+                    <div class="col-md-3">
+                        @Html.CheckBoxFor(m => m.IsOtherOptionA)
+                        @Html.LabelFor(m => m.IsOtherOptionA)
+                    </div>
+                    <div class="col-md-3">
+                        @Html.CheckBoxFor(m => m.IsOtherOptionB)
+                        @Html.LabelFor(m => m.IsOtherOptionB)
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="form-group">
+                    <div class="text-center col-md-12">
+                        <input type="submit" value="Proceed" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <div class="row text-center col-md-12">
+        <h2><span class="label label-success">@ViewBag.Message</span></h2>
+    </div>
+
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
