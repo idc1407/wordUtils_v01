@@ -1,14 +1,12 @@
 ﻿$(document).ready(function () {
 
-    function sayHello() {
-        return ('Hello ');
+    function test() {
+        return ('test');
     }
-
 
     $('#File').change(function () {
         $("#smessage").hide();
     });
-
 
     $('#IsFooterTextChange').change(function () {
         if (this.checked) {
@@ -24,7 +22,6 @@
         }
     });
 
-
     $('#IsHeaderTextChange').change(function () {
         if (this.checked) {
             $('#HeaderTextFind').attr('required', true);
@@ -38,4 +35,12 @@
             $('#HeaderTextReplace').removeClass('field-validation-error').next('span[data-valmsg-for]').removeClass("field-validation-error").addClass("field-validation-valid").html("");
         }
     });
+
+
+    $('#process').click(function () {
+        if ($("#uform").valid()) {
+            $("#loading").show();
+        }
+    });
+
 });

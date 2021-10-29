@@ -8,7 +8,7 @@
 <h2>@ViewBag.Title</h2>
 <div class="row">
     <div class="col-md-12">
-        @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("UploadFile", "Upload", FormMethod.Post, new { @class = "form-horizontal", id = "uform", role = "form", enctype = "multipart/form-data" }))
         {
             @Html.AntiForgeryToken()
 
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-3">
                         @Html.LabelFor(m => m.FooterTextFind, new { @class = "control-label" })
-                        @Html.TextBoxFor(m => m.FooterTextFind, new { @class = "form-control"  })
+                        @Html.TextBoxFor(m => m.FooterTextFind, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.FooterTextFind, "", new { @class = "text-danger" })
                     </div>
                     <div class="col-md-3">
@@ -90,7 +90,7 @@
             <div class="row">
                 <div class="form-group">
                     <div class="text-center col-md-12">
-                        <input type="submit" value="Proceed" class="btn btn-default" />
+                        <input type="submit" value="Proceed" id="process" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -99,6 +99,14 @@
 
     <div class="row text-center col-md-12" id="smessage">
         <h2><span class="label label-success">@ViewBag.Message</span></h2>
+    </div>
+
+
+
+    <div id="loading" class="row text-center col-md-12" style="display: none;">
+        <h2><span class="label label-info">Please Wait</span></h2>
+
+
     </div>
 
 </div>

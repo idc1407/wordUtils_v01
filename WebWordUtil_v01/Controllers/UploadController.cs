@@ -15,7 +15,13 @@ namespace WebWordUtil_v01.Controllers
         [HttpGet]
         public ActionResult UploadFile()
         {
-            return View();
+            UploadFileModel uploadModel = new UploadFileModel
+            {
+                FooterTextFind = "Footer text" ,
+                FooterTextReplace = "All is good"
+            };
+            
+            return View(uploadModel);
         }
 
 
@@ -43,7 +49,7 @@ namespace WebWordUtil_v01.Controllers
                     string destFileName = Path.Combine(Server.MapPath("~/UploadedFiles"), "temp2.docx");
 
 
-                    string[] textReplce = { "Footer text", "All is very very well" };
+                    string[] textReplce = { model.FooterTextFind, model.FooterTextReplace };
 
                     WordUtilLib.Main.Process(
                         _path,
