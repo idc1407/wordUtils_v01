@@ -16,11 +16,9 @@ namespace WebWordUtil_v01.Models
         public bool IsFooterTextChange { get; set; }
 
         [DisplayName("Find Text")]
-        [FooterTextFindValidation]
         public string FooterTextFind { get; set; }
 
         [DisplayName("Replace Text")]
-        [FooterTextReplaceValidation]
         public string FooterTextReplace { get; set; }
 
 
@@ -29,11 +27,9 @@ namespace WebWordUtil_v01.Models
         public bool IsHeaderTextChange { get; set; }
 
         [DisplayName("Find Text")]
-        [HeaderTextFindValidation]
         public string HeaderTextFind { get; set; }
 
         [DisplayName("Replace Text")]
-        [HeaderTextReplaceValidation]
         public string HeaderTextReplace { get; set; }
 
 
