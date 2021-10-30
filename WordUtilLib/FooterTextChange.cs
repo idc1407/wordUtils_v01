@@ -9,44 +9,82 @@ namespace WordUtilLib
 {
     public static class FooterTextChange
     {
-        public static string Process(WinWord.Document wordDoc, string findText, string replaceText)
+        public static async Task<string> Process(WinWord.Document wordDoc, string findText, string replaceText)
         {
+            
+            
             string status = "";
             object Unknown = Type.Missing;
             try
             {
 
                 object replaceAll = WinWord.WdReplace.wdReplaceAll;
-                foreach (WinWord.Section section in wordDoc.Sections)
+                await Task.Run(() =>
                 {
-                    WinWord.HeadersFooters footers = section.Footers;
-                    foreach (WinWord.HeaderFooter footer in footers)
+                    foreach (WinWord.Section section in wordDoc.Sections)
                     {
-                        WinWord.Range footerRange = footer.Range;
-                        footerRange.Find.ClearFormatting();
-                        footerRange.Find.Replacement.ClearFormatting();
-                        footerRange.Find.Text = findText;
-                        footerRange.Find.Replacement.Text = replaceText;
-                        footerRange.Find.Wrap = WinWord.WdFindWrap.wdFindContinue;
-                        footerRange.Find.Execute(
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref replaceAll,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown,
-                            ref Unknown
-                            );
+                        WinWord.HeadersFooters footers = section.Footers;
+                        foreach (WinWord.HeaderFooter footer in footers)
+                        {
+                            WinWord.Range footerRange = footer.Range;
+                            footerRange.Find.ClearFormatting();
+                            footerRange.Find.Replacement.ClearFormatting();
+                            footerRange.Find.Text = findText;
+                            footerRange.Find.Replacement.Text = replaceText;
+                            footerRange.Find.Wrap = WinWord.WdFindWrap.wdFindContinue;
+                            footerRange.Find.Execute(
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref replaceAll,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown,
+                                ref Unknown
+                                );
+                        }
                     }
-                }
+                });
+
+                //foreach (WinWord.Section section in wordDoc.Sections)
+                //{
+                //    WinWord.HeadersFooters footers = section.Footers;
+                //    foreach (WinWord.HeaderFooter footer in footers)
+                //    {
+                //        WinWord.Range footerRange = footer.Range;
+                //        footerRange.Find.ClearFormatting();
+                //        footerRange.Find.Replacement.ClearFormatting();
+                //        footerRange.Find.Text = findText;
+                //        footerRange.Find.Replacement.Text = replaceText;
+                //        footerRange.Find.Wrap = WinWord.WdFindWrap.wdFindContinue;
+                //        footerRange.Find.Execute(
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref replaceAll,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown,
+                //            ref Unknown
+                //            );
+                //    }
+                //}
+
+
             }
             catch (Exception ex)
             {

@@ -9,11 +9,11 @@ namespace testWordUtil_v01
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             string[] textReplce = { "Footer text goes here", "God is good" };
 
-            WordUtilLib.Main.Process(
+            await WordUtilLib.Main.Process(
                 @"D:\itemp\temp1.docx",
                 @"D:\itemp\temp2.docx",
                 textReplce

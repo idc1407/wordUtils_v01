@@ -10,7 +10,7 @@ namespace WordUtilLib
     public static class Main
     {
 
-        public static string Process(string sourceFileName, string targetFileName, string[] options)
+        public static async Task<string> Process(string sourceFileName, string targetFileName, string[] options)
         {
             string status = "";
 
@@ -22,7 +22,7 @@ namespace WordUtilLib
             wordDoc.Activate();
             try
             {
-                status = FooterTextChange.Process(wordDoc, options[0], options[1]);
+                status = await FooterTextChange.Process(wordDoc, options[0], options[1]);
                 if (status == "")
                 {
                     object filename = targetFileName;
