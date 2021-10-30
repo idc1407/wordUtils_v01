@@ -16,7 +16,7 @@ namespace WebWordUtil_v01
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "WordUtil", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "WordUtil", action = "ProcessFile", id = UrlParameter.Optional }
             );
         }
     }
