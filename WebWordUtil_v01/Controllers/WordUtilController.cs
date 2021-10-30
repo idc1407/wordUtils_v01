@@ -11,17 +11,17 @@ namespace WebWordUtil_v01.Controllers
         [HttpGet]
         public ActionResult ProcessFile()
         {
-            WordUtilModel wordUtilModel = new WordUtilModel
+            WordUtilWebModel wordUtilWebModel = new WordUtilWebModel
             {
                 FooterTextFind = "Footer text" ,
                 FooterTextReplace = "All is good"
             };
-            return View(wordUtilModel);
+            return View(wordUtilWebModel);
         }
        
 
         [HttpPost]
-        public async Task<ActionResult> ProcessFile(WordUtilModel model)
+        public async Task<ActionResult> ProcessFile(WordUtilWebModel wordUtilWebModel)
         {
             ViewBag.ErrorMessage = "";
             if (!ModelState.IsValid)
@@ -30,7 +30,7 @@ namespace WebWordUtil_v01.Controllers
                 return View();
             }
 
-            string status = await WordUtilService.ProcessWordDocument(model);
+            string status = await WordUtilService.ProcessWordDocument(wordUtilWebModel);
             if(String.IsNullOrEmpty(status))
             {
                 ViewBag.Message = "Job Completed Successfully!!";
@@ -38,7 +38,6 @@ namespace WebWordUtil_v01.Controllers
             else
             {
                 ViewBag.Message = "*** Job Failed. ***";
-
                 ViewBag.ErrorMessage = status;
             }
             return View();

@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordUtilLib", "WordUtilLib\WordUtilLib.csproj", "{C5CB43AA-B7BA-4D54-83C6-D4021999F323}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testWordUtil_v01", "testWordUtil_v01\testWordUtil_v01.csproj", "{C72476DE-8C7F-490F-A8C0-40301DB27866}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWordUtil_v01", "WebWordUtil_v01\WebWordUtil_v01.csproj", "{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}"
 EndProject
 Global
@@ -19,10 +17,6 @@ Global
 		{C5CB43AA-B7BA-4D54-83C6-D4021999F323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5CB43AA-B7BA-4D54-83C6-D4021999F323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5CB43AA-B7BA-4D54-83C6-D4021999F323}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C72476DE-8C7F-490F-A8C0-40301DB27866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C72476DE-8C7F-490F-A8C0-40301DB27866}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C72476DE-8C7F-490F-A8C0-40301DB27866}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C72476DE-8C7F-490F-A8C0-40301DB27866}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}.Release|Any CPU.ActiveCfg = Release|Any CPU

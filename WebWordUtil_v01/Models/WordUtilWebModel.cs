@@ -5,7 +5,7 @@ using System.ComponentModel;
 
 namespace WebWordUtil_v01.Models
 {
-    public class WordUtilModel
+    public class WordUtilWebModel
     {
         [Required(ErrorMessage = "Please Select a File.")]
         public HttpPostedFileBase File { get; set; }
@@ -18,7 +18,6 @@ namespace WebWordUtil_v01.Models
 
         [DisplayName("Replace Text")]
         public string FooterTextReplace { get; set; }
-
 
 
         [DisplayName("Header Text Change")]
@@ -44,5 +43,3 @@ namespace WebWordUtil_v01.Models
 
     }
 }
-
-

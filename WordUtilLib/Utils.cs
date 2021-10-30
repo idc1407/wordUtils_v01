@@ -4,9 +4,9 @@ using WinWord = Microsoft.Office.Interop.Word;
 
 namespace WordUtilLib
 {
-    public static class FooterTextChange
+    public static class Utils
     {
-        public static async Task<string> Process(WinWord.Document wordDoc, string findText, string replaceText)
+        public static async Task<string> FooterTextReplace(WinWord.Document wordDoc, string findText, string replaceText)
         {
             string status = "";
             object Unknown = Type.Missing;
@@ -53,5 +53,26 @@ namespace WordUtilLib
             }
             return status;
         }
+
+
+        public static async Task<string> HeaderTextReplace(WinWord.Document wordDoc, string findText, string replaceText)
+        {
+            string status = "";
+            object Unknown = Type.Missing;
+            try
+            {
+                object replaceAll = WinWord.WdReplace.wdReplaceAll;
+                await Task.Run(() =>
+                {
+                });
+            }
+            catch (Exception ex)
+            {
+                status = ex.ToString();
+            }
+            return status;
+        }
+
+
     }
 }
