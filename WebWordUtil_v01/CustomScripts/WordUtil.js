@@ -1,11 +1,8 @@
 ﻿$(document).ready(function () {
 
-    function test() {
-        return ('test');
-    }
-
     $('#File').change(function () {
         $("#smessage").hide();
+        $("#emessage").hide();
     });
 
     $('#IsFooterTextChange').change(function () {
@@ -38,7 +35,7 @@
 
 
     $('#process').click(function () {
-        if ($("#uform").valid()) {
+        if ($("#wform").valid()) {
             $("#loading").show();
         }
     });

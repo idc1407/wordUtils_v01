@@ -10,27 +10,28 @@ using WebWordUtil_v01.Services;
 
 namespace WebWordUtil_v01.Controllers
 {
-    public class UploadController : Controller
+    public class WordUtilController : Controller
     {
 
         [HttpGet]
-        public ActionResult UploadFile()
+        public ActionResult ProcessFile()
         {
-            UploadFileModel uploadModel = new UploadFileModel
+            WordUtilModel wordUtilModel = new WordUtilModel
             {
                 FooterTextFind = "Footer text" ,
                 FooterTextReplace = "All is good"
             };
             
-            return View(uploadModel);
+            return View(wordUtilModel);
         }
 
 
         
 
         [HttpPost]
-        public async Task<ActionResult> UploadFile(UploadFileModel model)
+        public async Task<ActionResult> ProcessFile(WordUtilModel model)
         {
+            ViewBag.ErrorMessage = "";
             if (!ModelState.IsValid)
             {
                 ViewBag.Message = "Invalid Data.";
@@ -45,6 +46,8 @@ namespace WebWordUtil_v01.Controllers
             else
             {
                 ViewBag.Message = "*** Job Failed. ***";
+
+                ViewBag.ErrorMessage = status;
             }
             return View();
         }

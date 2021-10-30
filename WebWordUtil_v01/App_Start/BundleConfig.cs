@@ -26,8 +26,8 @@ namespace WebWordUtil_v01
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/upload").Include(
-            "~/CustomScripts/upload.js"));
+            bundles.Add(new ScriptBundle("~/bundles/WordUtil").Include(
+            "~/CustomScripts/wordutil.js"));
 
 
         }

@@ -13,7 +13,7 @@ namespace WebWordUtil_v01.Services
 {
     public static class WordUtilService
     {
-        public static async Task<string> ProcessWordDocument(UploadFileModel uploadFileModel)
+        public static async Task<string> ProcessWordDocument(WordUtilModel uploadFileModel)
         {
             string status = "";
             try
