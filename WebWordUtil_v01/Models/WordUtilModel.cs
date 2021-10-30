@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
@@ -44,10 +42,7 @@ namespace WebWordUtil_v01.Models
         [DisplayName("Other Options B")]
         public bool IsOtherOptionB { get; set; }
 
-
     }
-
-
 }
 
 

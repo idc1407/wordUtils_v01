@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WinWord = Microsoft.Office.Interop.Word;
 
@@ -15,7 +12,6 @@ namespace WordUtilLib
             object Unknown = Type.Missing;
             try
             {
-
                 object replaceAll = WinWord.WdReplace.wdReplaceAll;
                 await Task.Run(() =>
                 {
@@ -57,7 +53,5 @@ namespace WordUtilLib
             }
             return status;
         }
-
-
     }
 }

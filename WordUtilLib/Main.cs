@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using WinWord = Microsoft.Office.Interop.Word;
 
@@ -9,11 +6,9 @@ namespace WordUtilLib
 {
     public static class Main
     {
-
         public static async Task<string> Process(string sourceFileName, string targetFileName, string[] options)
         {
             string status = "";
-
 
             object fileName = sourceFileName;
             WinWord.Application wordApp = new WinWord.Application { Visible = false };
