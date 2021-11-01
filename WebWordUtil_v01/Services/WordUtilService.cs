@@ -37,7 +37,8 @@ namespace WebWordUtil_v01.Services
                         IsOtherOptionA = wordUtilWebModel.IsOtherOptionA,
                         IsOtherOptionB = wordUtilWebModel.IsOtherOptionB
                     };
-                    status = await WordUtilLib.Main.Process(wordUtilModel);
+                    //status = await WordUtilLib.Main.Process(wordUtilModel);
+                    status = await WordUtilLib.Main.ProcessXML(wordUtilModel);
                 }
             }
             catch (Exception ex)

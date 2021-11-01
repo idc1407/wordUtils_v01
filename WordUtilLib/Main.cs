@@ -7,6 +7,26 @@ namespace WordUtilLib
 {
     public static class Main
     {
+
+        public static async Task<string> ProcessXML(WordUtilModel wordUtilModel)
+        {
+            string status = "";
+
+            try
+            {
+                if (wordUtilModel.IsFooterTextChange)
+                {
+                    status = await Utils.XmlFooterTextReplace(wordUtilModel.SourceFileName, wordUtilModel.FooterTextFind, wordUtilModel.FooterTextReplace);
+                }
+            }
+            catch (Exception ex)
+            {
+                status = ex.ToString();
+            }
+            return status;
+        }
+
+
         public static async Task<string> Process(WordUtilModel wordUtilModel)
         {
             string status = "";
@@ -22,7 +42,7 @@ namespace WordUtilLib
                 {
                     status = await Utils.FooterTextReplace(wordDoc, wordUtilModel.FooterTextFind, wordUtilModel.FooterTextReplace);
                 }
-                
+
                 if (status == "" && wordUtilModel.IsHeaderTextChange)
                 {
                     status = await Utils.HeaderTextReplace(wordDoc, wordUtilModel.HeaderTextFind, wordUtilModel.HeaderTextReplace);

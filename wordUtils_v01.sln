@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordUtilLib", "WordUtilLib\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWordUtil_v01", "WebWordUtil_v01\WebWordUtil_v01.csproj", "{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordUtilTest", "WordUtilTest\WordUtilTest.csproj", "{B70D92E2-DA9D-43BC-AEA9-00DD6E250F66}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78FB2D6C-00AE-4CB6-BF11-8C99F4C08672}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B70D92E2-DA9D-43BC-AEA9-00DD6E250F66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B70D92E2-DA9D-43BC-AEA9-00DD6E250F66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B70D92E2-DA9D-43BC-AEA9-00DD6E250F66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B70D92E2-DA9D-43BC-AEA9-00DD6E250F66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

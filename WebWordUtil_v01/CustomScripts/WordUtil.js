@@ -6,6 +6,7 @@
     });
 
     $('#IsFooterTextChange').change(function () {
+        console.log("I am here");
         if (this.checked) {
             $('#FooterTextFind').attr('required', true);
             $('#FooterTextReplace').attr('required', true);
