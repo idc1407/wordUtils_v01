@@ -1,0 +1,120 @@
+﻿--1
+
+List<Table> tables = package.MainDocumentPart.Document.Descendants<Table>().ToList();
+Table table = tables[0];
+
+// Find the second row in the table.  
+TableRow row = table.Elements<TableRow>().ElementAt(1);
+
+// Find the third cell in the row.  
+TableCell cell = row.Elements<TableCell>().ElementAt(0);
+
+// Find the first paragraph in the table cell.  
+Paragraph parag = cell.Elements<Paragraph>().First();
+
+// Find the first run in the paragraph.  
+Run run = parag.Elements<Run>().First();
+
+// Set the text for the run.  
+Text text = run.Elements<Text>().First();
+text.Text = "Love you Jesus";
+
+table.Remove();
+
+--1 EOF
+
+
+        public static void insertPage()
+        {
+            string fileName1 = @"d:\itemp\temp3.docx";
+            string fileName2 = @"d:\itemp\temp2.docx";
+            using (WordprocessingDocument myDoc =
+                WordprocessingDocument.Open(fileName1, true))
+            {
+                string altChunkId = "AltChunkId1";
+                MainDocumentPart mainPart = myDoc.MainDocumentPart;
+                AlternativeFormatImportPart chunk =
+                    mainPart.AddAlternativeFormatImportPart(
+                    AlternativeFormatImportPartType.WordprocessingML, altChunkId);
+                
+                using (FileStream fileStream = File.Open(fileName2, FileMode.Open))
+                {
+                    chunk.FeedData(fileStream);
+                }
+                
+                AltChunk altChunk = new AltChunk();
+                altChunk.Id = altChunkId;
+                mainPart.Document
+                    .Body
+                    .InsertAfter(altChunk, mainPart.Document.Body
+                    .Elements<Paragraph>().Last());
+                mainPart.Document.Save();
+            }
+
+            Console.WriteLine("Done");
+            Console.ReadKey();
+
+        }
+
+        public static void DeletePara()
+        {
+            bool found = false;
+            using (WordprocessingDocument package = WordprocessingDocument.Open(@"D:\itemp\temp3.docx", true))
+            {
+
+                MainDocumentPart mainPart = package.MainDocumentPart;
+                IEnumerable<OpenXmlElement> elems = mainPart.Document.Body.Descendants();
+
+
+                List<Paragraph> paragraphsToDelete = new List<Paragraph>();
+                List<Table> tablesToDelete = new List<Table>();
+
+                foreach (OpenXmlElement elem in elems)
+                {
+
+                    string x = elem.InnerText;
+
+                    if (!String.IsNullOrEmpty(x))
+                    {
+
+                        if (x.Contains("This is test document ivan thank god") && !found)
+                        {
+                            found = true;
+                        }
+
+                        if(found & elem is Table)
+                        {
+                            Table t = (Table)elem;
+                            tablesToDelete.Add(t);
+                        }
+                        else if (found & elem is Paragraph)
+                        {
+                            Paragraph p = (Paragraph)elem;
+                            paragraphsToDelete.Add(p);
+                        }
+
+                    }
+
+                }
+
+                foreach (var t in tablesToDelete)
+                {
+                    t.RemoveAllChildren();
+                    t.Remove();
+                }
+
+
+                foreach (var p in paragraphsToDelete)
+                {
+                    p.RemoveAllChildren();
+                    p.Remove();
+                }
+
+            }
+
+            Console.WriteLine("Done");
+            Console.ReadKey();
+
+
+        }
+

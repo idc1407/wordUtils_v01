@@ -70,7 +70,8 @@ namespace WordUtilLib
                 if (status == "")
                 {
                     object filename = wordUtilModel.TargetFileName;
-                    wordDoc.SaveAs(ref filename);
+                    //wordDoc.SaveAs(ref filename);
+                    wordDoc.Save();
                 }
             }
             catch (Exception ex)
