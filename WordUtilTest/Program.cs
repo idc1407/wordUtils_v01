@@ -8,6 +8,7 @@ using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using System.IO;
 using WinWord = Microsoft.Office.Interop.Word;
+using System.Diagnostics;
 
 namespace WordUtilTest
 {
@@ -19,9 +20,69 @@ namespace WordUtilTest
             //insertPage();
             //FindText();
             //FindReplaceText();
-            test06();
+            test07();
         }
 
+
+        public static string test07()
+        {
+            try
+            {
+                WinWord.Application wordApp = new WinWord.Application { Visible = false };
+                object missing = System.Reflection.Missing.Value;
+                WinWord.Document doc = wordApp.Documents.Add();
+
+
+                WinWord.Range range = doc.Content;
+                range.Text = "Hello world!";
+
+                range.InsertParagraphAfter();
+                range = doc.Paragraphs.Last.Range;
+
+                // start of list
+                int startOfList = range.Start;
+
+                // each \n character adds a new paragraph...
+                range.Text = "Item 1\nItem 2\nItem 3";
+
+                // ...or insert a new paragraph...
+                range.InsertParagraphAfter();
+                range = doc.Paragraphs.Last.Range;
+                range.Text = "Item 4\nItem 5";
+
+                // end of list
+                int endOfList = range.End;
+
+                // insert the next paragraph before applying the format, otherwise
+                // the format will be copied to the suceeding paragraphs.
+                range.InsertParagraphAfter();
+
+                // apply list format
+                WinWord.Range listRange = doc.Range(startOfList, endOfList);
+                listRange.ListFormat.ApplyBulletDefault();
+
+                range = doc.Paragraphs.Last.Range;
+                range.Text = "Bye for now!";
+                range.InsertParagraphAfter();
+
+
+
+                string path = Environment.CurrentDirectory;
+                int totalExistDocx = Directory.GetFiles(path, "test*.docx").Count();
+                path = Path.Combine(path, string.Format("test{0}.docx", totalExistDocx + 1));
+
+                wordApp.ActiveDocument.SaveAs2(path);
+                doc.Close();
+
+                Process.Start(path);
+            }
+            catch (Exception )
+            {
+
+                throw;
+            }
+            return "";
+        }
 
         public static string test06()
         {
@@ -30,9 +91,12 @@ namespace WordUtilTest
             WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
+            
+
             string status = "";
             try
             {
+
                 WinWord.Range hrange = wordDoc.Range(0,0);
                 hrange.Select();
                 Console.WriteLine(wordApp.Selection.Words.Count);
@@ -352,7 +416,7 @@ namespace WordUtilTest
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine(ex.ToString());
             }
             finally
             {
