@@ -20,7 +20,45 @@ namespace WordUtilTest
             //insertPage();
             //FindText();
             //FindReplaceText();
-            test07();
+            test08();
+        }
+
+
+        public static string test08()
+        {
+            object fileName_01 = @"d:\itemp\test.docx";
+            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+
+            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
+            object Unknown = Type.Missing;
+
+            string status = "";
+            try
+            {
+
+                wordDoc01.Activate();
+
+
+
+                
+
+
+
+
+
+            }
+            catch (Exception ex)
+            {
+                status = ex.ToString();
+            }
+            finally
+            {
+                wordDoc01.Close();
+                wordDoc01 = null;
+                wordApp.Quit(ref Unknown, ref Unknown, ref Unknown);
+                wordApp = null;
+            }
+            return status;
         }
 
 

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StkServer", "StkServer\StkS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAspx", "WebAspx\WebAspx.csproj", "{0539FD0F-CC20-42D6-9379-F081AB95B996}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordUtilWebApi", "WordUtilWebApi\WordUtilWebApi.csproj", "{0CDE374C-D3A6-47B3-9C5B-E04DF45D3381}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{0539FD0F-CC20-42D6-9379-F081AB95B996}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0539FD0F-CC20-42D6-9379-F081AB95B996}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0539FD0F-CC20-42D6-9379-F081AB95B996}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CDE374C-D3A6-47B3-9C5B-E04DF45D3381}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CDE374C-D3A6-47B3-9C5B-E04DF45D3381}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CDE374C-D3A6-47B3-9C5B-E04DF45D3381}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CDE374C-D3A6-47B3-9C5B-E04DF45D3381}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

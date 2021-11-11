@@ -85,11 +85,23 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <div class="text-center col-md-12">
+                            <asp:Button ID="Button1" Text="Ajax" Class="btn btn-primary" />
+                        </div>
+                    </div>
+                </div>
+
+
+
             </form>
         </div>
 
         <div class="row text-center col-md-12" id="smessage">
-            <h2><asp:Label ID="smessage" class="label label-success" runat="server"></asp:Label></h2>
+            <h2>
+                <asp:Label ID="smessage" class="label label-success" runat="server"></asp:Label></h2>
         </div>
 
 
