@@ -20,31 +20,81 @@ namespace WordUtilTest
             //insertPage();
             //FindText();
             //FindReplaceText();
-            test08();
+            test09();
         }
 
-
-        public static string test08()
+        public static string test09()
         {
-            object fileName_01 = @"d:\itemp\test.docx";
+            object fileName_01 = @"d:\itemp\test_para.docx";
             WinWord.Application wordApp = new WinWord.Application { Visible = false };
 
             WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
             object Unknown = Type.Missing;
 
+            WinWord.Range rangeFind;
+            
+
+            List<WinWord.Range> lst = new List<WinWord.Range>() ;
+
             string status = "";
             try
             {
+                rangeFind = wordDoc01.Range(0, 0);
+                WinWord.Find find = rangeFind.Find;
+                find.ClearFormatting();
+                find.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphLeft;
 
-                wordDoc01.Activate();
+                while (find.Execute())
+                {
+                    lst.Add(rangeFind.Duplicate);
+                }
+
+                foreach (var item in lst){
+                    item.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                status = ex.ToString();
+            }
+            finally
+            {
+                wordDoc01.Close();
+                wordDoc01 = null;
+                wordApp.Quit(ref Unknown, ref Unknown, ref Unknown);
+                wordApp = null;
+            }
+            return status;
+        }
 
 
+        public static string test08()
+        {
+            object fileName_01 = @"d:\itemp\test_para.docx";
+            WinWord.Application wordApp = new WinWord.Application { Visible = false };
 
-                
+            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
+            object Unknown = Type.Missing;
 
+            WinWord.Range rangeFind;
+            WinWord.Range rangeFound;
 
+            string status = "";
+            try
+            {
+                rangeFind = wordDoc01.Range(0, 0);
+                WinWord.Find find = rangeFind.Find;
+                find.ClearFormatting();
+                find.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphLeft;
 
-
+                while (find.Execute())
+                {
+                    rangeFound = rangeFind.Duplicate;
+                    rangeFound.InsertBefore("<H1>");
+                    rangeFound.MoveEnd(Unit: WinWord.WdUnits.wdCharacter, Count: -1);
+                    rangeFound.InsertAfter("<B1>");
+                }
 
             }
             catch (Exception ex)
