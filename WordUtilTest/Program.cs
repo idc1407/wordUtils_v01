@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Wordprocessing;
 using System.IO;
-using WinWord = Microsoft.Office.Interop.Word;
+using Microsoft.Office.Interop.Word;
 using System.Diagnostics;
 
 namespace WordUtilTest
@@ -20,53 +17,104 @@ namespace WordUtilTest
             //insertPage();
             //FindText();
             //FindReplaceText();
-            test10();
+            test11();
         }
 
-        public static string test10()
+
+        public static string test11()
         {
             try
             {
-                WinWord.Application wordApp = new WinWord.Application { Visible = true };
-                WinWord.Document doc = wordApp.Documents.Add();
+                Application wordApp = new Application { Visible = true };
+                Document doc = wordApp.Documents.Open(@"d:\itemp\test_para.docx", ReadOnly: false, Visible: true);
 
 
-                WinWord.Range range = doc.Content;
-                range.Text = "Hello world!";
+                foreach (Section section in doc.Sections)
+                {
+                    Range headerRange = section.Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    headerRange.Fields.Add(headerRange, WdFieldType.wdFieldPage);
+                    headerRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                    headerRange.Font.ColorIndex = WdColorIndex.wdBlue;
+                    headerRange.Font.Size = 10;
+                    headerRange.Text = "Header text goes here";
+                }
 
-                range.SetRange(Start: doc.Range().End, End:doc.Range().End) ;
+                foreach (Section wordSection in doc.Sections)
+                {
+                    Range footerRange = wordSection.Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary].Range;
+                    footerRange.Font.ColorIndex = WdColorIndex.wdDarkRed;
+                    footerRange.Font.Size = 10;
+                    footerRange.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
+                    footerRange.Text = "Footer text goes here";
+                }
 
-                range.Text = "Bye for now!";
+
+
             }
             catch (Exception EX)
             {
 
-                Console.WriteLine(EX.ToString()) ''
+                Console.WriteLine(EX.ToString());
             }
             return "";
         }
 
 
+
+
+
+        public static string test10()
+        {
+            try
+            {
+                Application wordApp = new Application { Visible = true };
+                Document doc = wordApp.Documents.Add();
+
+
+                Range range = doc.Content;
+                range.Text = "Hello world!";
+
+                range.SetRange(Start: doc.Range().End, End: doc.Range().End);
+
+                range.Text = "Bye for now!";
+
+                // doc.Content.Select();
+                range.Select();
+                //range = doc.Content;
+
+
+            }
+            catch (Exception EX)
+            {
+
+                Console.WriteLine(EX.ToString());
+            }
+            return "";
+        }
+
+
+
+
         public static string test09()
         {
             object fileName_01 = @"d:\itemp\test_para.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+            Application wordApp = new Application { Visible = false };
 
-            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
+            Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
             object Unknown = Type.Missing;
 
-            WinWord.Range rangeFind;
+            Range rangeFind;
             
 
-            List<WinWord.Range> lst = new List<WinWord.Range>() ;
+            List<Range> lst = new List<Range>() ;
 
             string status = "";
             try
             {
                 rangeFind = wordDoc01.Range(0, 0);
-                WinWord.Find find = rangeFind.Find;
+                Find find = rangeFind.Find;
                 find.ClearFormatting();
-                find.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphLeft;
+                find.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
 
                 while (find.Execute())
                 {
@@ -74,7 +122,7 @@ namespace WordUtilTest
                 }
 
                 foreach (var item in lst){
-                    item.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphCenter;
+                    item.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphCenter;
                 }
 
             }
@@ -96,27 +144,27 @@ namespace WordUtilTest
         public static string test08()
         {
             object fileName_01 = @"d:\itemp\test_para.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+            Application wordApp = new Application { Visible = false };
 
-            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
+            Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: true);
             object Unknown = Type.Missing;
 
-            WinWord.Range rangeFind;
-            WinWord.Range rangeFound;
+            Range rangeFind;
+            Range rangeFound;
 
             string status = "";
             try
             {
                 rangeFind = wordDoc01.Range(0, 0);
-                WinWord.Find find = rangeFind.Find;
+                Find find = rangeFind.Find;
                 find.ClearFormatting();
-                find.ParagraphFormat.Alignment = WinWord.WdParagraphAlignment.wdAlignParagraphLeft;
+                find.ParagraphFormat.Alignment = WdParagraphAlignment.wdAlignParagraphLeft;
 
                 while (find.Execute())
                 {
                     rangeFound = rangeFind.Duplicate;
                     rangeFound.InsertBefore("<H1>");
-                    rangeFound.MoveEnd(Unit: WinWord.WdUnits.wdCharacter, Count: -1);
+                    rangeFound.MoveEnd(Unit: WdUnits.wdCharacter, Count: -1);
                     rangeFound.InsertAfter("<B1>");
                 }
 
@@ -140,12 +188,12 @@ namespace WordUtilTest
         {
             try
             {
-                WinWord.Application wordApp = new WinWord.Application { Visible = false };
+                Application wordApp = new Application { Visible = false };
                 object missing = System.Reflection.Missing.Value;
-                WinWord.Document doc = wordApp.Documents.Add();
+                Document doc = wordApp.Documents.Add();
 
 
-                WinWord.Range range = doc.Content;
+                Range range = doc.Content;
                 range.Text = "Hello world!";
 
                 range.InsertParagraphAfter();
@@ -170,7 +218,7 @@ namespace WordUtilTest
                 range.InsertParagraphAfter();
 
                 // apply list format
-                WinWord.Range listRange = doc.Range(startOfList, endOfList);
+                Range listRange = doc.Range(startOfList, endOfList);
                 listRange.ListFormat.ApplyBulletDefault();
 
                 range = doc.Paragraphs.Last.Range;
@@ -199,8 +247,8 @@ namespace WordUtilTest
         public static string test06()
         {
             object fileName = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
-            WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
+            Application wordApp = new Application { Visible = false };
+            Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             
@@ -209,7 +257,7 @@ namespace WordUtilTest
             try
             {
 
-                WinWord.Range hrange = wordDoc.Range(0,0);
+                Range hrange = wordDoc.Range(0,0);
                 hrange.Select();
                 Console.WriteLine(wordApp.Selection.Words.Count);
                 Console.ReadKey();
@@ -232,14 +280,14 @@ namespace WordUtilTest
         public static string test05()
         {
             object fileName = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
-            WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
+            Application wordApp = new Application { Visible = false };
+            Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
             try
             {
-                WinWord.Range hrange = wordDoc.Range(0, 0);
+                Range hrange = wordDoc.Range(0, 0);
                 while (hrange.Find.Execute("Range finder"))
                 {
                  
@@ -281,10 +329,10 @@ namespace WordUtilTest
         {
             object fileName_01 = @"d:\itemp\test.docx";
             object fileName_02 = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+            Application wordApp = new Application { Visible = false };
 
-            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: false);
-            WinWord.Document wordDoc02 = wordApp.Documents.Open(fileName_02, ReadOnly: false, Visible: false);
+            Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: false);
+            Document wordDoc02 = wordApp.Documents.Open(fileName_02, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
@@ -292,8 +340,8 @@ namespace WordUtilTest
             {
 
                 wordDoc01.Activate();
-                //wordApp.Selection.GoTo(What: WinWord.WdGoToItem.wdGoToPage, Count: 1);
-                wordApp.Selection.EndKey(Unit: WinWord.WdUnits.wdStory, Extend: WinWord.WdMovementType.wdExtend);
+                //wordApp.Selection.GoTo(What: WdGoToItem.wdGoToPage, Count: 1);
+                wordApp.Selection.EndKey(Unit: WdUnits.wdStory, Extend: WdMovementType.wdExtend);
                 //wordApp.Selection.Copy();
 
                 wordDoc01.Activate();
@@ -302,14 +350,14 @@ namespace WordUtilTest
 
 
                 wordDoc02.Activate();
-                wordApp.Selection.HomeKey(Unit: WinWord.WdUnits.wdStory);
+                wordApp.Selection.HomeKey(Unit: WdUnits.wdStory);
                 wordApp.Selection.Find.Text = "test";
 
                 while (wordApp.Selection.Find.Execute())
                 {
                     if(wordApp.Selection.Font.Size == 20)
                     {
-                        //wordApp.Selection.PageSetup.Orientation = WinWord.WdOrientation.wdOrientLandscape;
+                        //wordApp.Selection.PageSetup.Orientation = WdOrientation.wdOrientLandscape;
 
                         wordApp.Selection.Paste();
                     }
@@ -338,9 +386,9 @@ namespace WordUtilTest
         public static void test03()
         {
             object fileName_01 = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+            Application wordApp = new Application { Visible = false };
 
-            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: false);
+            Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
@@ -348,7 +396,7 @@ namespace WordUtilTest
             {
                 wordDoc01.Activate();
 
-                foreach (WinWord.Paragraph objParagraph in wordDoc01.Paragraphs)
+                foreach (Paragraph objParagraph in wordDoc01.Paragraphs)
                 {
                     Console.WriteLine(objParagraph.Range.Text);
                 }
@@ -375,10 +423,10 @@ namespace WordUtilTest
         {
             object fileName_01 = @"d:\itemp\test.docx";
             object fileName_02 = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+            Application wordApp = new Application { Visible = false };
 
-            WinWord.Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: false);
-            WinWord.Document wordDoc02 = wordApp.Documents.Open(fileName_02, ReadOnly: false, Visible: false);
+            Document wordDoc01 = wordApp.Documents.Open(fileName_01, ReadOnly: false, Visible: false);
+            Document wordDoc02 = wordApp.Documents.Open(fileName_02, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
@@ -389,7 +437,7 @@ namespace WordUtilTest
 
                 wordDoc01.Activate();
                 wordDoc01.Content.Select();
-                wordApp.Selection.MoveEnd(WinWord.WdUnits.wdParagraph, 1);
+                wordApp.Selection.MoveEnd(WdUnits.wdParagraph, 1);
                 wordApp.Selection.Copy();
 
                 wordDoc02.Activate();
@@ -398,13 +446,13 @@ namespace WordUtilTest
 
                 //var docRange = wordDoc02.Content;
                 //wordDoc02.Application.Selection.Find.ClearFormatting();
-                //WinWord.Find findObject = docRange.Find;
+                //Find findObject = docRange.Find;
                 //findObject.Text = "hhiugh";
                 //findObject.Forward = true;
                 //findObject.Execute();
                 //if (findObject.Found)
                 //{
-                //    docRange.Expand(WinWord.WdUnits.wdParagraph);
+                //    docRange.Expand(WdUnits.wdParagraph);
                 //    docRange.Delete();
                 //}
 
@@ -439,10 +487,10 @@ namespace WordUtilTest
         public static void test01()
         {
 
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
+            Application wordApp = new Application { Visible = false };
             object missing = System.Reflection.Missing.Value;
 
-            WinWord.Document wordDoc = wordApp.Documents.Add();
+            Document wordDoc = wordApp.Documents.Add();
 
             try
             {
@@ -451,12 +499,12 @@ namespace WordUtilTest
                 wordDoc.Content.Select();
                 wordApp.Selection.Copy();
 
-                wordApp.Selection.EndKey(WinWord.WdUnits.wdStory, missing);
+                wordApp.Selection.EndKey(WdUnits.wdStory, missing);
 
                 
                 //wordApp.Selection.GoTo(
-        //What: WinWord.WdGoToItem.wdGoToPage,
-        //Which: WinWord.WdGoToDirection.wdGoToAbsolute,
+        //What: WdGoToItem.wdGoToPage,
+        //Which: WdGoToDirection.wdGoToAbsolute,
         //Count: 3);
         
 
@@ -496,13 +544,13 @@ namespace WordUtilTest
 
                 var docRange = wordDoc.Content;
                 wordDoc.Application.Selection.Find.ClearFormatting();
-                WinWord.Find findObject = docRange.Find;
+                Find findObject = docRange.Find;
                 findObject.Text = "rum";
                 findObject.Forward = true;
                 //findObject.Execute();
                 //if (findObject.Found)
                 //{
-                //    docRange.Expand(WinWord.WdUnits.wdParagraph);
+                //    docRange.Expand(WdUnits.wdParagraph);
                 //    docRange.Delete();
                 //}
 
@@ -514,7 +562,7 @@ namespace WordUtilTest
                     {
                         break;
                     }
-                    docRange.Expand(WinWord.WdUnits.wdParagraph);
+                    docRange.Expand(WdUnits.wdParagraph);
                     float x = docRange.Font.Size;
                     docRange.Delete();
                 }
@@ -547,26 +595,26 @@ namespace WordUtilTest
         public static string FooterTextReplace(string findText, string replaceText)
         {
             object fileName = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
-            WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
+            Application wordApp = new Application { Visible = false };
+            Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
             try
             {
                 wordDoc.Activate();
-                object replaceAll = WinWord.WdReplace.wdReplaceAll;
-                foreach (WinWord.Section section in wordDoc.Sections)
+                object replaceAll = WdReplace.wdReplaceAll;
+                foreach (Section section in wordDoc.Sections)
                 {
-                    WinWord.HeadersFooters footers = section.Footers;
-                    foreach (WinWord.HeaderFooter footer in footers)
+                    HeadersFooters footers = section.Footers;
+                    foreach (HeaderFooter footer in footers)
                     {
-                        WinWord.Range footerRange = footer.Range;
+                        Range footerRange = footer.Range;
                         footerRange.Find.ClearFormatting();
                         footerRange.Find.Replacement.ClearFormatting();
                         footerRange.Find.Text = findText;
                         footerRange.Find.Replacement.Text = replaceText;
-                        footerRange.Find.Wrap = WinWord.WdFindWrap.wdFindContinue;
+                        footerRange.Find.Wrap = WdFindWrap.wdFindContinue;
                         footerRange.Find.Execute(
                             ref Unknown,
                             ref Unknown,
@@ -606,15 +654,15 @@ namespace WordUtilTest
         public static string insertPage()
         {
             object fileName = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
-            WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
+            Application wordApp = new Application { Visible = false };
+            Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
             try
             {
                 wordDoc.Activate();
-                WinWord.Range hrange = wordDoc.Range(0, 0);
+                Range hrange = wordDoc.Range(0, 0);
 
                 hrange.Find.Execute("Range finder");
 
@@ -630,7 +678,7 @@ namespace WordUtilTest
 
                 //hrange.Find.Execute("This is test document ivan"); 
 
-                //hrange.InsertBreak(WinWord.WdBreakType.wdPageBreak);
+                //hrange.InsertBreak(WdBreakType.wdPageBreak);
 
 
             }
@@ -652,8 +700,8 @@ namespace WordUtilTest
         {
             int cnt = 0;
             object fileName = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
-            WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
+            Application wordApp = new Application { Visible = false };
+            Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
@@ -667,7 +715,7 @@ namespace WordUtilTest
 
 
                 wordDoc.Application.Selection.Find.ClearFormatting();
-                WinWord.Find findObject = wordDoc.Application.Selection.Find;
+                Find findObject = wordDoc.Application.Selection.Find;
                 findObject.Text = "Para 1 text";
                 findObject.Forward = true;
                 findObject.Execute();
@@ -701,17 +749,17 @@ namespace WordUtilTest
         {
             int cnt = 0;
             object fileName = @"d:\itemp\temp2.docx";
-            WinWord.Application wordApp = new WinWord.Application { Visible = false };
-            WinWord.Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
+            Application wordApp = new Application { Visible = false };
+            Document wordDoc = wordApp.Documents.Open(fileName, ReadOnly: false, Visible: false);
             object Unknown = Type.Missing;
 
             string status = "";
             try
             {
                 wordDoc.Activate();
-                WinWord.Range range = wordDoc.Content;
+                Range range = wordDoc.Content;
                 range.Find.ClearFormatting();
-                range.Find.Execute(FindText: "Para 1 text", ReplaceWith: "RRPara 1 text", Replace: WinWord.WdReplace.wdReplaceAll);
+                range.Find.Execute(FindText: "Para 1 text", ReplaceWith: "RRPara 1 text", Replace: WdReplace.wdReplaceAll);
 
             }
             catch (Exception ex)
