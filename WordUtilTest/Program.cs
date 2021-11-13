@@ -20,8 +20,32 @@ namespace WordUtilTest
             //insertPage();
             //FindText();
             //FindReplaceText();
-            test09();
+            test10();
         }
+
+        public static string test10()
+        {
+            try
+            {
+                WinWord.Application wordApp = new WinWord.Application { Visible = true };
+                WinWord.Document doc = wordApp.Documents.Add();
+
+
+                WinWord.Range range = doc.Content;
+                range.Text = "Hello world!";
+
+                range.SetRange(Start: doc.Range().End, End:doc.Range().End) ;
+
+                range.Text = "Bye for now!";
+            }
+            catch (Exception EX)
+            {
+
+                Console.WriteLine(EX.ToString()) ''
+            }
+            return "";
+        }
+
 
         public static string test09()
         {
