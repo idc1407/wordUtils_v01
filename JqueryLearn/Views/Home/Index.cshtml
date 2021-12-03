@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+
+<div class="text-center">
+
+    Country : 
+    <select id ="selectCountries">
+        <option value = "USA">United States</option>
+        <option value = "IN">India</option>
+        <option value = "USA">Russia</option>
+    </select>
+    
+    <br/> <br/>
+
+    <div id = "divResult">
+
+    </div>
+
+
+</div>
+
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+
+        $('#selectCountries').change(function(){
+            var selected = $('#selectCountries option:selected') ;
+            $('#divResult').html(selected.val()) ;
+        });
+
+
+
+    });
+</script>
+}

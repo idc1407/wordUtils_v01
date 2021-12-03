@@ -25,6 +25,53 @@ namespace WordUtilTest
         {
             try
             {
+                Application wordApp = new Application();
+                wordApp.Visible = true;
+                Document doc = wordApp.Documents.Add();
+
+
+                Range range = doc.Range();
+                range.Text = "Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse";
+
+                range.Collapse(WdCollapseDirection.wdCollapseEnd);
+                //range.InsertBreak(Type: WdBreakType.wdLineBreak);
+                range.InsertParagraph();
+                range.InsertAfter("tol Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse Collapse");
+
+
+                range.Collapse(WdCollapseDirection.wdCollapseEnd);
+                //range.InsertBreak(Type: WdBreakType.wdLineBreak);
+                range.InsertParagraph();
+                range.InsertAfter("bol");
+
+                range.Font.Name = "Verdana";
+                range.Font.Bold = 1;
+
+                foreach ( Range word in range.Words)
+                {
+                    Console.WriteLine(word.Text) ;
+                }
+
+                 
+                 Console.WriteLine(range.Characters.Count);
+                 Console.ReadKey();
+
+
+            }
+            catch (Exception EX)
+            {
+
+                Console.WriteLine(EX.ToString());
+            }
+            return "";
+        }
+
+
+
+        public static string test10()
+        {
+            try
+            {
                 Application wordApp = new Application { Visible = true };
                 Document doc = wordApp.Documents.Open(@"d:\itemp\test_para.docx", ReadOnly: false, Visible: true);
 
@@ -63,35 +110,7 @@ namespace WordUtilTest
 
 
 
-        public static string test10()
-        {
-            try
-            {
-                Application wordApp = new Application { Visible = true };
-                Document doc = wordApp.Documents.Add();
-
-
-                Range range = doc.Content;
-                range.Text = "Hello world!";
-
-                range.SetRange(Start: doc.Range().End, End: doc.Range().End);
-
-                range.Text = "Bye for now!";
-
-                // doc.Content.Select();
-                range.Select();
-                //range = doc.Content;
-
-
-            }
-            catch (Exception EX)
-            {
-
-                Console.WriteLine(EX.ToString());
-            }
-            return "";
-        }
-
+       
 
 
 
