@@ -15,6 +15,7 @@ namespace JqueryLearn.Controllers
 
         public IActionResult Index()
         {
+            _logger.LogInformation("I am good");
             return View();
         }
 
